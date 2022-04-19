@@ -1,0 +1,90 @@
+body{
+	background-color: #458860;
+}
+
+nav.navbar{
+	background-color: #5BB27E;
+}
+
+.navbar-btns *{
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+.navbar-item{
+	border-bottom: 3px solid transparent;
+	transition: border-bottom 200ms ease-in-out;
+	display: flex;
+
+}
+
+.navbar-item:hover{
+	border-bottom-color: white;
+}
+
+.navbar-item:hover *{
+	color: #FFFFFF;
+}
+
+.navbar-login-item{
+	color: #5BB27E;
+	background-color: #FFFFFF;
+	border-radius: 0.25em;
+	padding: 6px;
+}
+
+.navbar-login-item *{
+	color: #5BB27E;
+	padding: 8px;
+	transition: transform 250ms ease-in-out;
+	
+}
+
+.navbar-login-item:hover *{
+	color: #5BB27E;
+}
+
+.navbar-login-item:hover i{
+	transform: translateX(-6px);
+}
+
+main.container{
+	background-color: #FFF;
+	border-radius: 2em;
+}
+
+main p{
+	color: #5BB27E;
+	font-weight: normal;
+}
+
+.img__marketplace img{
+	width: 100%;
+}
+
+.divisor{
+	background-color: #5BB27E;
+	height: 1px;
+}
+
+.img__account img{
+	width: 100%;
+}
+
+.img__account img, .img__marketplace img{
+	filter: drop-shadow(6px 3px 3px rgba(0, 0, 0, 0.2));
+}
+
+.btn-primary{
+	background-color: #5BB27E;
+	border-color: #5BB27E;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+	background-color: #458860;
+	border-color: #458860;
+}
+
+.btn-primary:focus{
+	box-shadow: 0 0 0 0.25rem #5BB27E80;
+}
