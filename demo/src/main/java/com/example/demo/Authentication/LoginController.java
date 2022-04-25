@@ -18,8 +18,8 @@ public class LoginController {
 		this.loginService = loginService;
 	}
 
-	@PostMapping
-	public void retorno(HttpServletResponse response,
+	@PostMapping(path = "/")
+	public HttpServletResponse retorno(HttpServletResponse response,
 	                      @CookieValue(value = "auth", defaultValue = "undefined") String authString,
 	                      @RequestBody Usuario usuario){
 
@@ -28,6 +28,7 @@ public class LoginController {
 		} else {
 			response.setStatus(404);
 		}
+		return response;
 	}
 
 }

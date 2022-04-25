@@ -24,7 +24,9 @@ public class UsuarioConfig {
 						1000,
 						"9 9999 9999",
 						"Rua tal, numero tal, bairro tal",
-						"111.111.111-11"
+						"111.111.111-11",
+						"",
+						""
 				);
 
 				Usuario alex = new Usuario(
@@ -35,7 +37,9 @@ public class UsuarioConfig {
 						1000,
 						"9 9999 9999",
 						"Rua tal, numero tal, bairro tal",
-						"111.111.111-11"
+						"111.111.111-11",
+						"",
+						""
 				);
 
 				repository.saveAll(

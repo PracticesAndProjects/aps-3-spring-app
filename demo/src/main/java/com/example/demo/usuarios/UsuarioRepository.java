@@ -15,8 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	@Query("SELECT s FROM Usuario s WHERE s.email = ?1 AND s.senha = ?2")
 	Optional<Usuario> findUsuarioByEmailandSenha(String email, String senha);
 
-	@Query("SELECT s FROM Usuario s WHERE s.auth = ?1")
-	Optional<Usuario> findUsuarioByAuth(String Auth);
+	@Query("SELECT s FROM Usuario s WHERE s.token = ?1")
+	Optional<Usuario> findUsuarioByAuth(String token);
 
 
 }

@@ -24,7 +24,7 @@ public class LoginService {
 	@Transactional
 	public HttpServletResponse doLogin(HttpServletResponse response, Usuario usuario){
 
-		Optional<Usuario> UsuarioEmailandSenhaOptional = usuarioRepository.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha());
+//		Optional<Usuario> UsuarioEmailandSenhaOptional = usuarioRepository.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha());
 
 		Usuario usuariodb = usuarioRepository
 				.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha())

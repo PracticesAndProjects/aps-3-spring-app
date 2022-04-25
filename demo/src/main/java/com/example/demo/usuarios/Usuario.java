@@ -47,7 +47,16 @@ public class Usuario {
 		this.cpf_cnpj = cpf_cnpj;
 	}
 
-	public Usuario(String name, String email, LocalDate data_nasc, int orcamento_total, int orcamento_op, String telefone, String endereco, String cpf_cnpj) {
+	public Usuario(String name,
+	               String email,
+	               LocalDate data_nasc,
+	               int orcamento_total,
+	               int orcamento_op,
+	               String telefone,
+	               String endereco,
+	               String cpf_cnpj,
+	               String token,
+	               String senha) {
 		this.name = name;
 		this.email = email;
 		this.data_nasc = data_nasc;
@@ -56,6 +65,8 @@ public class Usuario {
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.cpf_cnpj = cpf_cnpj;
+		this.senha = senha;
+		this.token = token;
 	}
 
 	public Usuario(String email, String senha, String token){
