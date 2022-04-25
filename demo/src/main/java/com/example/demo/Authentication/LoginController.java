@@ -1,31 +1,33 @@
 package com.example.demo.Authentication;
 
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.usuarios.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 @RequestMapping(path = "login")
 public class LoginController {
 
+	private final LoginService loginService;
+
+	@Autowired
+	public LoginController(LoginService loginService) {
+		this.loginService = loginService;
+	}
+
 	@PostMapping
-	public String retorno(HttpServletResponse response, @CookieValue(value = "logado", defaultValue = "undefined") String logado){
+	public void retorno(HttpServletResponse response,
+	                      @CookieValue(value = "auth", defaultValue = "undefined") String authString,
+	                      @RequestBody Usuario usuario){
 
-		if (logado.equals("undefined")){
-
-			Cookie cookieLogado = new Cookie("logado", "true");
-			cookieLogado.setMaxAge(9999);
-
-			response.addCookie(cookieLogado);
-
-			return "Logado com sucesso";
+		if (authString.equals("undefined")){
+			loginService.doLogin(response, usuario);
+		} else {
+			response.setStatus(404);
 		}
-
-		return "Usuário já se encontra logado";
 	}
 
 }
