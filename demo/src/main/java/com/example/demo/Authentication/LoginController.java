@@ -19,14 +19,15 @@ public class LoginController {
 	}
 
 	@PostMapping
-	public void loginPostMapping(HttpServletResponse response,
+	public String loginPostMapping(HttpServletResponse response,
 	                      @CookieValue(value = "auth", defaultValue = "undefined") String authString,
 	                      @RequestBody Usuario usuario){
 
 		if (authString.equals("undefined")){
-			loginService.doLogin(response, usuario);
+			return loginService.doLogin(response, usuario);
 		} else {
 			response.setStatus(401);
+			return null;
 		}
 	}
 

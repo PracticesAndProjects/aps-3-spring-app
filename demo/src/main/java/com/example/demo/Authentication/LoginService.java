@@ -22,7 +22,7 @@ public class LoginService {
 	}
 
 	@Transactional
-	public void doLogin(HttpServletResponse response, Usuario usuario){
+	public String doLogin(HttpServletResponse response, Usuario usuario){
 
 //		Optional<Usuario> UsuarioEmailandSenhaOptional = usuarioRepository.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha());
 
@@ -32,7 +32,7 @@ public class LoginService {
 
 		if (usuariodb == null){
 			response.setStatus(401);
-			return;
+			return null;
 		}
 
 		String token = TokenGenerator.generateNewToken();
@@ -44,9 +44,8 @@ public class LoginService {
 		cookieLogado.setHttpOnly(true);
 		cookieLogado.setSecure(true);
 
-		response.addCookie(cookieLogado);
-		response.setStatus(200);
 
+		return TokenGenerator.token(token);
 
 	}
 
