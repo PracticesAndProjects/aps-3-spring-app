@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(path = "login")
+@RequestMapping(path = "/login")
 public class LoginController {
 
 	private final LoginService loginService;
@@ -18,17 +18,16 @@ public class LoginController {
 		this.loginService = loginService;
 	}
 
-	@PostMapping(path = "/")
-	public HttpServletResponse retorno(HttpServletResponse response,
+	@PostMapping
+	public void loginPostMapping(HttpServletResponse response,
 	                      @CookieValue(value = "auth", defaultValue = "undefined") String authString,
 	                      @RequestBody Usuario usuario){
 
 		if (authString.equals("undefined")){
 			loginService.doLogin(response, usuario);
 		} else {
-			response.setStatus(404);
+			response.setStatus(401);
 		}
-		return response;
 	}
 
 }

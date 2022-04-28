@@ -22,14 +22,18 @@ public class LoginService {
 	}
 
 	@Transactional
-	public HttpServletResponse doLogin(HttpServletResponse response, Usuario usuario){
+	public void doLogin(HttpServletResponse response, Usuario usuario){
 
 //		Optional<Usuario> UsuarioEmailandSenhaOptional = usuarioRepository.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha());
 
 		Usuario usuariodb = usuarioRepository
 				.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha())
-				.orElseThrow(() -> new IllegalStateException("Usuário não existe"));
+				.orElse(null);
 
+		if (usuariodb == null){
+			response.setStatus(401);
+			return;
+		}
 
 		String token = TokenGenerator.generateNewToken();
 		usuario.setToken(token);
@@ -43,20 +47,17 @@ public class LoginService {
 		response.addCookie(cookieLogado);
 		response.setStatus(200);
 
-		return response;
 
 	}
 
-	public String checkAuth(@CookieValue(value = "auth", defaultValue = "undefined") String cookie){
+	public void checkAuth(HttpServletResponse response, @CookieValue(value = "auth", defaultValue = "undefined") String cookie){
 
 		Usuario usuariodb = usuarioRepository
 				.findUsuarioByAuth(cookie)
 				.orElse(null);
 
 		if(cookie.equals("undefined") | usuariodb == null ){
-			return "redirect:login";
+			response.setStatus(401);
 		}
-
-		return usuariodb.getName() + usuariodb.getEmail();
 	}
 }
