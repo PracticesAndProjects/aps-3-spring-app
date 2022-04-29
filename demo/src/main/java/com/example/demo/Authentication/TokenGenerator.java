@@ -18,7 +18,7 @@ public class TokenGenerator {
 	}
 
 	public static String token(String token){
-		return "{\n\"Token\": \"" + token + "\"\n}";
+		return "{\n\"AccessToken\": \"" + token + "\"\n}";
 	}
 
 }

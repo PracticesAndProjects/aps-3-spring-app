@@ -1,9 +1,11 @@
 package com.example.demo.usuarios;
 
+import com.example.demo.Dashboard.DashboardUserData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,6 +19,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	@Query("SELECT s FROM Usuario s WHERE s.token = ?1")
 	Optional<Usuario> findUsuarioByAuth(String token);
+
+	@Query("SELECT new com.example.demo.Dashboard.DashboardUserData(s.name, s.email, s.data_nasc, s.orcamento_total, s.orcamento_op, s.telefone, s.endereco, s.cpf_cnpj) FROM Usuario s WHERE s.token = ?1")
+	Optional<DashboardUserData> findUsuarioByAuthList(String token);
 
 
 }

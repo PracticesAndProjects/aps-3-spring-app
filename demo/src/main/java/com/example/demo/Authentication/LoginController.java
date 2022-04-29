@@ -1,6 +1,7 @@
 package com.example.demo.Authentication;
 
 import com.example.demo.usuarios.Usuario;
+import jdk.jfr.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(path = "/login")
+@RequestMapping(path = "api/v1/user/signup", produces = "application/json")
 public class LoginController {
 
 	private final LoginService loginService;

@@ -25,7 +25,7 @@ public class UsuarioConfig {
 						"9 9999 9999",
 						"Rua tal, numero tal, bairro tal",
 						"111.111.111-11",
-						"",
+						"1",
 						"123456"
 				);
 
@@ -38,7 +38,7 @@ public class UsuarioConfig {
 						"9 9999 9999",
 						"Rua tal, numero tal, bairro tal",
 						"111.111.111-11",
-						"",
+						"2",
 						"123456"
 				);
 
