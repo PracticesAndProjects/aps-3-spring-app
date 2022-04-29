@@ -1,8 +1,12 @@
 package com.example.demo.usuarios;
 
+import com.example.demo.Listings.Listings;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -74,6 +78,8 @@ public class Usuario {
 		this.senha = senha;
 		this.token = token;
 	}
+
+
 
 
 	public Long getId() {
