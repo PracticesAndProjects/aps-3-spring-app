@@ -1,6 +1,9 @@
 package com.example.demo.usuarios;
 
 import com.example.demo.Authentication.TokenGenerator;
+import com.example.demo.DTOs.UsuarioPublicDTO;
+import com.example.demo.DbEntities.Usuario;
+import com.example.demo.Repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,8 +63,8 @@ public class UsuarioService {
 	public void updateUsuario(Long studentId, String name, String email) {
 		Usuario student = usuarioRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Usuario with id " + studentId + " does not exists!"));
 
-		if (name != null && name.length() > 0 && !Objects.equals(student.getName(), name)){
-			student.setName(name);
+		if (name != null && name.length() > 0 && !Objects.equals(student.getNome(), name)){
+			student.setNome(name);
 		}
 
 		if (email != null && email.length() > 0 && !Objects.equals(student.getEmail(), email)){
@@ -71,6 +74,18 @@ public class UsuarioService {
 			}
 			student.setEmail(email);
 		}
+	}
+
+	public UsuarioPublicDTO getPublicUserInfo(HttpServletResponse response, String authString, Long id){
+		UsuarioPublicDTO usuarioDb =
+				usuarioRepository.findUsuarioPublicById(id).orElse(null);
+
+		if (usuarioDb == null){
+			response.setStatus(401);
+			return null;
+		}
+
+		return usuarioDb;
 	}
 
 

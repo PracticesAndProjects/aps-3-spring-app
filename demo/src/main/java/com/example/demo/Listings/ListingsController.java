@@ -1,5 +1,8 @@
 package com.example.demo.Listings;
 
+import com.example.demo.DTOs.ListingsDTO;
+import com.example.demo.DTOs.OrderDTO;
+import com.example.demo.DbEntities.Listagem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +22,7 @@ public class ListingsController {
 
 	@PostMapping(path = "add")
 	public void addListings(HttpServletResponse response,
-	                        @RequestBody Listings listingObj,
+	                        @RequestBody Listagem listingObj,
 	                        @CookieValue(value = "token", defaultValue = "undefined") String authString){
 		listingsService.addNewListings(response, listingObj, authString);
 	}
@@ -35,7 +38,23 @@ public class ListingsController {
 
 	@GetMapping
 	public List<ListingsDTO> getListings(HttpServletResponse response,
-	                                  @CookieValue(value = "token", defaultValue = "undefined") String authString){
+	                                     @CookieValue(value = "token", defaultValue = "undefined") String authString){
 		return listingsService.getListings(response, authString);
 	}
+
+	@PostMapping(path = "order/create")
+	public void orderList(HttpServletResponse response,
+	                      @CookieValue(value = "token", defaultValue = "undefined") String authString,
+	                      @RequestParam(name = "listingid") Long id){
+		listingsService.createOrder(response, authString, id);
+	}
+
+	@GetMapping(path = "order")
+	public List<OrderDTO> getOrders(HttpServletResponse response,
+	                                @CookieValue(value = "token", defaultValue = "undefined") String authString){
+		return listingsService.getMyOrders(response, authString);
+	}
+
+	//https://stackoverflow.com/questions/21456494/spring-jpa-query-with-like
+	//Spring JPA search query
 }

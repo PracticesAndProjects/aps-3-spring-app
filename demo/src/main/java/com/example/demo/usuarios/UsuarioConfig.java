@@ -1,5 +1,7 @@
 package com.example.demo.usuarios;
 
+import com.example.demo.DbEntities.Usuario;
+import com.example.demo.Repositories.UsuarioRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

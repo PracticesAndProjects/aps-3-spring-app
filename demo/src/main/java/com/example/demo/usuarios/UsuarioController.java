@@ -1,5 +1,7 @@
 package com.example.demo.usuarios;
 
+import com.example.demo.DTOs.UsuarioPublicDTO;
+import com.example.demo.DbEntities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,13 @@ public class UsuarioController {
 	@GetMapping
 	public List<Usuario> getUsuarios(){
 		return usuarioService.getUsuarios();
+	}
+
+	@GetMapping(path = "{id}")
+	public UsuarioPublicDTO getPublicUserInfo(HttpServletResponse response,
+	                                          @CookieValue(value = "token", defaultValue = "undefined") String authString,
+	                                          @PathVariable("id") Long id){
+		return usuarioService.getPublicUserInfo(response, authString, id);
 	}
 
 	@PostMapping

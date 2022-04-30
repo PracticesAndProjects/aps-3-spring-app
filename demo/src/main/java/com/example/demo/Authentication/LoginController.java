@@ -1,12 +1,10 @@
 package com.example.demo.Authentication;
 
-import com.example.demo.usuarios.Usuario;
-import jdk.jfr.ContentType;
+import com.example.demo.DbEntities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @RestController
 @RequestMapping(path = "api/v1/user/signup", produces = "application/json")

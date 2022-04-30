@@ -1,12 +1,8 @@
-package com.example.demo.usuarios;
-
-import com.example.demo.Listings.Listings;
+package com.example.demo.DbEntities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table
@@ -22,7 +18,7 @@ public class Usuario {
 			generator = "usuario_sequence"
 	)
 	private Long id;
-	private String name;
+	private String nome;
 	private String email;
 	private String senha;
 	private String token;
@@ -39,9 +35,9 @@ public class Usuario {
 	}
 
 
-	public Usuario(Long id, String name, String email, LocalDate data_nasc, int orcamento_total, int orcamento_op, String telefone, String endereco, String cpf_cnpj) {
+	public Usuario(Long id, String nome, String email, LocalDate data_nasc, int orcamento_total, int orcamento_op, String telefone, String endereco, String cpf_cnpj) {
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 		this.email = email;
 		this.data_nasc = data_nasc;
 		this.orcamento_total = orcamento_total;
@@ -51,7 +47,7 @@ public class Usuario {
 		this.cpf_cnpj = cpf_cnpj;
 	}
 
-	public Usuario(String name,
+	public Usuario(String nome,
 	               String email,
 	               LocalDate data_nasc,
 	               int orcamento_total,
@@ -61,7 +57,7 @@ public class Usuario {
 	               String cpf_cnpj,
 	               String token,
 	               String senha) {
-		this.name = name;
+		this.nome = nome;
 		this.email = email;
 		this.data_nasc = data_nasc;
 		this.orcamento_total = orcamento_total;
@@ -90,12 +86,12 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -182,7 +178,7 @@ public class Usuario {
 	public String toString() {
 		return "Usuario{" +
 				"id=" + id +
-				", name='" + name + '\'' +
+				", name='" + nome + '\'' +
 				", email='" + email + '\'' +
 				", data_nasc=" + data_nasc +
 				", orcamento_total=" + orcamento_total +

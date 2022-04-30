@@ -1,7 +1,7 @@
 package com.example.demo.Authentication;
 
-import com.example.demo.usuarios.Usuario;
-import com.example.demo.usuarios.UsuarioRepository;
+import com.example.demo.DbEntities.Usuario;
+import com.example.demo.Repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.CookieValue;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Service
 public class LoginService {
