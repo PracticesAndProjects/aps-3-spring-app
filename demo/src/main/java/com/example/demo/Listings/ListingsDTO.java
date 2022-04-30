@@ -1,24 +1,7 @@
 package com.example.demo.Listings;
 
-import com.example.demo.usuarios.Usuario;
 
-import javax.persistence.*;
-
-@Entity
-@Table
-public class Listings {
-
-	@Id
-	@SequenceGenerator(
-			name = "listings_sequence",
-			sequenceName = "listings_sequence",
-			allocationSize = 1
-	)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "listings_sequence"
-	)
-	private Long id;
+public class ListingsDTO {
 	private String title;
 	private String imgUrl;
 	private String materialType;
@@ -27,31 +10,21 @@ public class Listings {
 	private int deliveryMedianPrice;
 	private int volumeDimension;
 	private int weightDimension;
+	private Long usuario_id;
+	private Long listing_id;
+	private String owner_name;
 
-	@ManyToOne
-	@JoinColumn(name = "usuario_id")
-	private Usuario usuario;
-
-	public Listings() {
-	}
-
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Listings(String title,
-	                String imgUrl,
-	                String materialType,
-	                int deliveryType,
-	                int productPrice,
-	                int deliveryMedianPrice,
-	                int volumeDimension,
-	                int weightDimension) {
+	public ListingsDTO(String title,
+	                   String imgUrl,
+	                   String materialType,
+	                   int deliveryType,
+	                   int productPrice,
+	                   int deliveryMedianPrice,
+	                   int volumeDimension,
+	                   int weightDimension,
+	                   Long usuario_id,
+	                   Long listing_id,
+	                   String owner_name) {
 		this.title = title;
 		this.imgUrl = imgUrl;
 		this.materialType = materialType;
@@ -60,7 +33,9 @@ public class Listings {
 		this.deliveryMedianPrice = deliveryMedianPrice;
 		this.volumeDimension = volumeDimension;
 		this.weightDimension = weightDimension;
-
+		this.usuario_id = usuario_id;
+		this.listing_id = listing_id;
+		this.owner_name = owner_name;
 	}
 
 	public String getTitle() {
@@ -127,8 +102,27 @@ public class Listings {
 		this.weightDimension = weightDimension;
 	}
 
+	public Long getUsuario_id() {
+		return usuario_id;
+	}
 
+	public void setUsuario_id(Long usuario_id) {
+		this.usuario_id = usuario_id;
+	}
 
+	public Long getListing_id() {
+		return listing_id;
+	}
+
+	public void setListing_id(Long listing_id) {
+		this.listing_id = listing_id;
+	}
+
+	public String getOwner_name() {
+		return owner_name;
+	}
+
+	public void setOwner_name(String owner_name) {
+		this.owner_name = owner_name;
+	}
 }
-
-

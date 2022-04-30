@@ -40,4 +40,23 @@ public class ListingsService {
 		listingsRepository.deleteById(listingId);
 	}
 
+	public List<ListingsDTO> getListings(HttpServletResponse response,
+	                                  String authString){
+		Usuario usuariodb = usuarioRepository.findUsuarioByAuth(authString).orElse(null);
+		if (usuariodb == null){
+			response.setStatus(401);
+			return null;
+		}
+
+		System.out.println("-----------------------");
+		List<ListingsDTO> userListings = listingsRepository.findByusuario_id(usuariodb.getId());
+//		List<Listings> userListings = listingsRepository.getListingByUserId(usuariodb.getId());
+		if (userListings.isEmpty()){
+			response.setStatus(200);
+			return null;
+		}
+		return userListings;
+
+	}
+
 }

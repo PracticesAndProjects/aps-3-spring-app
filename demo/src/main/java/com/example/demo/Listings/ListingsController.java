@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/user/listings")
@@ -30,5 +31,11 @@ public class ListingsController {
 		listingsService.removeListings(response,
 				listingId,
 				authString);
+	}
+
+	@GetMapping
+	public List<ListingsDTO> getListings(HttpServletResponse response,
+	                                  @CookieValue(value = "token", defaultValue = "undefined") String authString){
+		return listingsService.getListings(response, authString);
 	}
 }
