@@ -1,0 +1,49 @@
+
+
+api/v1/usuarios
+    GET - Retorna lista completa de usuarios
+    GET {Id Usuario} - Retorna informações públicas de usuário específico
+    POST - Registra novo usuario - JSON [1]
+    DELETE {Id Usuario} - Deleta conta de usuario
+
+api/v1/user/listings
+    GET - Retorna lista de anuncios
+    GET ?search={Pesquisa} - Retorna lista de anúncios por pesquisa
+    DELETE /{Id Anuncio} - Deleta anúncio por ID (Precisa ser dono)
+    POST - Cria anúncio - JSON [2]
+
+api/v1/user/listings/order
+    GET - Retorna lista de ordem de pedido do usuário
+    POST ?listingid={id do anuncio} - Cria ordem de pedido
+    DELETE ?order={id} - Exclui pedido por ID (Precisa ser dono)
+
+api/v1/dashboard
+    GET - Retorna dados do próprio usuário para apresentar ao dashboard
+
+
+    JSON usados em operação de CREATE
+    [1]:
+    {
+    "nome": "string",
+    "email": "string",
+    "senha": "string",
+    "data_nasc": "string YYYY/MM/DD",
+    "orcamento_total": int,
+    "orcamento_op": int,
+    "telefone": "string",
+    "endereco": "string",
+    "cpf_cnpj": "string"
+    }
+
+    [2]:
+    {
+    "titulo": "string",
+    "img_url": "string",
+    "material_type": "string",
+    "delivery_type": int,
+    "product_price": int,
+    "delivery_median_price": int,
+    "volume_dimension": int,
+    "weight_dimension": int
+    }
+    OBS: delivery_type = 1: Conta do comprador, 2: Conta do vendedor
