@@ -36,7 +36,15 @@ public class Usuario {
 	}
 
 
-	public Usuario(Long id, String nome, String email, LocalDate data_nasc, int orcamento_total, int orcamento_op, String telefone, String endereco, String cpf_cnpj) {
+	public Usuario(Long id,
+	               String nome,
+	               String email,
+	               LocalDate data_nasc,
+	               int orcamento_total,
+	               int orcamento_op,
+	               String telefone,
+	               String endereco,
+	               String cpf_cnpj) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -77,7 +85,25 @@ public class Usuario {
 	}
 
 
-
+	public Usuario(String nome,
+	               String email,
+	               String senha,
+	               LocalDate data_nasc,
+	               int orcamento_total,
+	               int orcamento_op,
+	               String telefone,
+	               String endereco,
+	               String cpf_cnpj) {
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.data_nasc = data_nasc;
+		this.orcamento_total = orcamento_total;
+		this.orcamento_op = orcamento_op;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.cpf_cnpj = cpf_cnpj;
+	}
 
 	public Long getId() {
 		return id;
