@@ -2,7 +2,7 @@ package com.example.demo.DTOs;
 
 
 public class ListingsDTO {
-	private String title;
+	private String titulo;
 	private String img_url;
 	private String material_type;
 	private int delivery_type; //1: Conta do comprador, 2: Conta do vendedor
@@ -14,7 +14,7 @@ public class ListingsDTO {
 	private Long listing_id;
 	private String owner_name;
 
-	public ListingsDTO(String title,
+	public ListingsDTO(String titulo,
 	                   String img_url,
 	                   String material_type,
 	                   int delivery_type,
@@ -25,7 +25,7 @@ public class ListingsDTO {
 	                   Long usuario_id,
 	                   Long listing_id,
 	                   String owner_name) {
-		this.title = title;
+		this.titulo = titulo;
 		this.img_url = img_url;
 		this.material_type = material_type;
 		this.delivery_type = delivery_type;
@@ -38,12 +38,12 @@ public class ListingsDTO {
 		this.owner_name = owner_name;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getImg_url() {

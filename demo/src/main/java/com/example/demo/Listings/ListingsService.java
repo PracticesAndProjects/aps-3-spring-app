@@ -44,26 +44,36 @@ public class ListingsService {
 	public void removeListings(HttpServletResponse response,
 	                           Long listingId,
 	                           String authString){
+		try{
 		listingsRepository.deleteById(listingId);
+		}catch (Exception e){
+			response.setStatus(406);
+		}
 	}
 
-	public List<ListingsDTO> getListings(HttpServletResponse response,
-	                                     String authString){
-		Usuario usuariodb = usuarioRepository.findUsuarioByAuth(authString).orElse(null);
-		if (usuariodb == null){
+
+	public List<ListingsDTO> getListingsBySearch(HttpServletResponse response,
+	                                             String authString,
+	                                             String searchParam){
+		List<ListingsDTO> searchResult;
+		Usuario usuarioDb = usuarioRepository.findUsuarioByAuth(authString).orElse(null);
+		if (usuarioDb == null){
 			response.setStatus(401);
 			return null;
 		}
 
-		System.out.println("-----------------------");
-		List<ListingsDTO> userListings = listingsRepository.findByusuario_id(usuariodb.getId());
-//		List<Listagem> userListings = listingsRepository.getListingByUserId(usuariodb.getId());
-		if (userListings.isEmpty()){
-			response.setStatus(200);
+		if (searchParam == null){
+			searchResult = listingsRepository.findByusuario_id(usuarioDb.getId());
+		} else {
+			searchResult = listingsRepository.findBySearchParam(searchParam);
+		}
+
+		if (searchResult.isEmpty()){
+			response.setStatus(404);
 			return null;
 		}
-		return userListings;
 
+		return searchResult;
 	}
 
 	public void createOrder(HttpServletResponse response,
@@ -101,6 +111,19 @@ public class ListingsService {
 
 		return List.of(userOrders);
 
+	}
+	public void removeOrder(HttpServletResponse response,
+	                         String authString,
+	                         Long orderParam){
+		Usuario usuarioDb = usuarioRepository.findUsuarioByAuth(authString).orElse(null);
+		UsuarioOrdem ordemDb = orderRepository.findOrderByOwnerId(usuarioDb.getId()).orElse(null);
+
+		if (usuarioDb  == null || ordemDb == null){
+			response.setStatus(406);
+		}
+		if(usuarioDb.getId().equals(ordemDb.getUsuario().getId())){
+			orderRepository.deleteById(ordemDb.getId());
+		}
 	}
 
 }

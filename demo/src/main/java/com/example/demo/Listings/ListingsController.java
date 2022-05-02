@@ -20,14 +20,14 @@ public class ListingsController {
 		this.listingsService = listingsService;
 	}
 
-	@PostMapping(path = "add")
+	@PostMapping
 	public void addListings(HttpServletResponse response,
 	                        @RequestBody Listagem listingObj,
 	                        @CookieValue(value = "token", defaultValue = "undefined") String authString){
 		listingsService.addNewListings(response, listingObj, authString);
 	}
 
-	@DeleteMapping(path = "delete/{listingId}")
+	@DeleteMapping(path = "/{listingId}")
 	public void removeListings(HttpServletResponse response,
 	                           @PathVariable("listingId") Long listingId,
 	                           @CookieValue(value = "token", defaultValue = "undefined") String authString){
@@ -37,12 +37,13 @@ public class ListingsController {
 	}
 
 	@GetMapping
-	public List<ListingsDTO> getListings(HttpServletResponse response,
-	                                     @CookieValue(value = "token", defaultValue = "undefined") String authString){
-		return listingsService.getListings(response, authString);
+	public List<ListingsDTO> getListingsSearch(HttpServletResponse response,
+	                                           @CookieValue(value = "token", defaultValue = "undefined") String authString,
+	                                           @RequestParam(name = "search", required = false) String searchParam){
+		return listingsService.getListingsBySearch(response, authString, searchParam);
 	}
 
-	@PostMapping(path = "order/create")
+	@PostMapping(path = "order")
 	public void orderList(HttpServletResponse response,
 	                      @CookieValue(value = "token", defaultValue = "undefined") String authString,
 	                      @RequestParam(name = "listingid") Long id){
@@ -53,6 +54,13 @@ public class ListingsController {
 	public List<OrderDTO> getOrders(HttpServletResponse response,
 	                                @CookieValue(value = "token", defaultValue = "undefined") String authString){
 		return listingsService.getMyOrders(response, authString);
+	}
+
+	@DeleteMapping(path = "order")
+	public void deleteOrders(HttpServletResponse response,
+	                         @CookieValue(value = "token", defaultValue = "undefined") String authString,
+							@RequestParam("order") Long orderParam){
+		listingsService.removeOrder(response, authString, orderParam);
 	}
 
 	//https://stackoverflow.com/questions/21456494/spring-jpa-query-with-like

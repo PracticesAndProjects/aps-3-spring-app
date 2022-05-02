@@ -1,6 +1,7 @@
 package com.example.demo.DbEntities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -26,7 +27,7 @@ public class Listagem {
 	private int volume_dimension;
 	private int weight_dimension;
 
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 

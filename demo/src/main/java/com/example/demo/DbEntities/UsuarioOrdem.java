@@ -18,15 +18,19 @@ public class UsuarioOrdem {
 	private Long id;
 	private boolean isAccepted;
 
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario_ordem;
 
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	@JoinColumn(name = "listing_id")
 	private Listagem listing_ordem;
 
 	public UsuarioOrdem() {
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public Usuario getUsuario() {
