@@ -1,9 +1,10 @@
 package com.example.demo.usuarios;
 
 import com.example.demo.Authentication.TokenGenerator;
-import com.example.demo.DTOs.UsuarioPublicDTO;
 import com.example.demo.DbEntities.Usuario;
 import com.example.demo.Repositories.UsuarioRepository;
+import com.example.demo.domain.mapping.UsuarioPublicDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +25,13 @@ public class UsuarioService {
 		this.usuarioRepository = usuarioRepository;
 	}
 
-
 	public List<Usuario> getUsuarios() {
 		return usuarioRepository.findAll();
 	}
 
 	public HttpServletResponse addNewUsuario(Usuario usuario, HttpServletResponse response) {
 		Optional<Usuario> UsuarioOptional = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
-		if (UsuarioOptional.isPresent()){
+		if (UsuarioOptional.isPresent()) {
 			throw new IllegalStateException("Email taken");
 		}
 
@@ -53,7 +53,7 @@ public class UsuarioService {
 	public void deleteUsuario(Long studentId) {
 		boolean exists = usuarioRepository.existsById(studentId);
 
-		if(!exists) {
+		if (!exists) {
 			throw new IllegalStateException("Usuario with id " + studentId + " does not exists");
 		}
 		usuarioRepository.deleteById(studentId);
@@ -61,13 +61,14 @@ public class UsuarioService {
 
 	@Transactional
 	public void updateUsuario(Long studentId, String name, String email) {
-		Usuario student = usuarioRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Usuario with id " + studentId + " does not exists!"));
+		Usuario student = usuarioRepository.findById(studentId)
+				.orElseThrow(() -> new IllegalStateException("Usuario with id " + studentId + " does not exists!"));
 
-		if (name != null && name.length() > 0 && !Objects.equals(student.getNome(), name)){
+		if (name != null && name.length() > 0 && !Objects.equals(student.getNome(), name)) {
 			student.setNome(name);
 		}
 
-		if (email != null && email.length() > 0 && !Objects.equals(student.getEmail(), email)){
+		if (email != null && email.length() > 0 && !Objects.equals(student.getEmail(), email)) {
 			Optional<Usuario> studentOptional = usuarioRepository.findUsuarioByEmail(email);
 			if (studentOptional.isPresent()) {
 				throw new IllegalStateException("Email taken");
@@ -76,11 +77,10 @@ public class UsuarioService {
 		}
 	}
 
-	public UsuarioPublicDTO getPublicUserInfo(HttpServletResponse response, String authString, Long id){
-		UsuarioPublicDTO usuarioDb =
-				usuarioRepository.findUsuarioPublicById(id).orElse(null);
+	public UsuarioPublicDTO getPublicUserInfo(HttpServletResponse response, String authString, Long id) {
+		UsuarioPublicDTO usuarioDb = usuarioRepository.findUsuarioPublicById(id).orElse(null);
 
-		if (usuarioDb == null){
+		if (usuarioDb == null) {
 			response.setStatus(401);
 			return null;
 		}
@@ -88,15 +88,13 @@ public class UsuarioService {
 		return usuarioDb;
 	}
 
-
-//		return List.of(
-//				new Usuario(
-//						1L,
-//						"Mariam",
-//						"mariam.jamal@gmail.com",
-//						LocalDate.of(2000, Month.JANUARY, 5),
-//						21
-//				)
-//		);
+	// return List.of(
+	// new Usuario(
+	// 1L,
+	// "Mariam",
+	// "mariam.jamal@gmail.com",
+	// LocalDate.of(2000, Month.JANUARY, 5),
+	// 21
+	// )
+	// );
 }
-

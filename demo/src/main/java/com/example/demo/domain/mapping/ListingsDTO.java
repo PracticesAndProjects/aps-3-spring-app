@@ -1,11 +1,10 @@
-package com.example.demo.DTOs;
-
+package com.example.demo.domain.mapping;
 
 public class ListingsDTO {
 	private String titulo;
 	private String img_url;
 	private String material_type;
-	private int delivery_type; //1: Conta do comprador, 2: Conta do vendedor
+	private int delivery_type; // 1: Conta do comprador, 2: Conta do vendedor
 	private int product_price;
 	private int delivery_median_price;
 	private int volume_dimension;
@@ -15,16 +14,16 @@ public class ListingsDTO {
 	private String owner_name;
 
 	public ListingsDTO(String titulo,
-	                   String img_url,
-	                   String material_type,
-	                   int delivery_type,
-	                   int product_price,
-	                   int delivery_median_price,
-	                   int volume_dimension,
-	                   int weight_dimension,
-	                   Long usuario_id,
-	                   Long listing_id,
-	                   String owner_name) {
+			String img_url,
+			String material_type,
+			int delivery_type,
+			int product_price,
+			int delivery_median_price,
+			int volume_dimension,
+			int weight_dimension,
+			Long usuario_id,
+			Long listing_id,
+			String owner_name) {
 		this.titulo = titulo;
 		this.img_url = img_url;
 		this.material_type = material_type;

@@ -1,13 +1,14 @@
 package com.example.demo.Listings;
 
-import com.example.demo.DTOs.ListingsDTO;
-import com.example.demo.DTOs.OrderDTO;
 import com.example.demo.DbEntities.Listagem;
 import com.example.demo.DbEntities.UsuarioOrdem;
 import com.example.demo.Repositories.ListingsRepository;
 import com.example.demo.Repositories.OrderRepository;
 import com.example.demo.DbEntities.Usuario;
 import com.example.demo.Repositories.UsuarioRepository;
+import com.example.demo.domain.mapping.ListingsDTO;
+import com.example.demo.domain.mapping.OrderDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -23,17 +24,18 @@ public class ListingsService {
 	private final OrderRepository orderRepository;
 
 	@Autowired
-	public ListingsService(UsuarioRepository usuarioRepository, ListingsRepository listingsRepository, OrderRepository orderRepository) {
+	public ListingsService(UsuarioRepository usuarioRepository, ListingsRepository listingsRepository,
+			OrderRepository orderRepository) {
 		this.usuarioRepository = usuarioRepository;
 		this.listingsRepository = listingsRepository;
 		this.orderRepository = orderRepository;
 	}
 
 	public void addNewListings(HttpServletResponse response,
-	                           @RequestBody Listagem listingObj,
-	                           @CookieValue(value = "token", defaultValue = "undefined") String authString){
+			@RequestBody Listagem listingObj,
+			@CookieValue(value = "token", defaultValue = "undefined") String authString) {
 		Usuario usuariodb = usuarioRepository.findUsuarioByAuth(authString).orElse(null);
-		if (usuariodb == null){
+		if (usuariodb == null) {
 			response.setStatus(401);
 			return;
 		}
@@ -42,33 +44,32 @@ public class ListingsService {
 	}
 
 	public void removeListings(HttpServletResponse response,
-	                           Long listingId,
-	                           String authString){
-		try{
-		listingsRepository.deleteById(listingId);
-		}catch (Exception e){
+			Long listingId,
+			String authString) {
+		try {
+			listingsRepository.deleteById(listingId);
+		} catch (Exception e) {
 			response.setStatus(406);
 		}
 	}
 
-
 	public List<ListingsDTO> getListingsBySearch(HttpServletResponse response,
-	                                             String authString,
-	                                             String searchParam){
+			String authString,
+			String searchParam) {
 		List<ListingsDTO> searchResult;
 		Usuario usuarioDb = usuarioRepository.findUsuarioByAuth(authString).orElse(null);
-		if (usuarioDb == null){
+		if (usuarioDb == null) {
 			response.setStatus(401);
 			return null;
 		}
 
-		if (searchParam == null){
+		if (searchParam == null) {
 			searchResult = listingsRepository.findByusuario_id(usuarioDb.getId());
 		} else {
 			searchResult = listingsRepository.findBySearchParam(searchParam);
 		}
 
-		if (searchResult.isEmpty()){
+		if (searchResult.isEmpty()) {
 			response.setStatus(404);
 			return null;
 		}
@@ -77,12 +78,12 @@ public class ListingsService {
 	}
 
 	public void createOrder(HttpServletResponse response,
-	                        String authString,
-	                        Long id){
+			String authString,
+			Long id) {
 		Usuario usuarioDb = usuarioRepository.findUsuarioByAuth(authString)
 				.orElse(null);
 		Listagem listingDb = listingsRepository.findById(id).orElse(null);
-		if (usuarioDb == null || listingDb == null ) {
+		if (usuarioDb == null || listingDb == null) {
 			System.out.println("-------------------------------------------");
 			System.out.println(usuarioDb);
 			System.out.println(listingDb);
@@ -96,7 +97,7 @@ public class ListingsService {
 	}
 
 	public List<OrderDTO> getMyOrders(HttpServletResponse response,
-	                                   String authString){
+			String authString) {
 		Usuario usuarioDb = usuarioRepository.findUsuarioByAuth(authString).orElse(null);
 		if (usuarioDb == null) {
 			response.setStatus(401);
@@ -104,7 +105,7 @@ public class ListingsService {
 		}
 
 		OrderDTO userOrders = orderRepository.findOrderByUserId(usuarioDb.getId()).orElse(null);
-		if (userOrders == null){
+		if (userOrders == null) {
 			response.setStatus(404);
 			return null;
 		}
@@ -112,16 +113,17 @@ public class ListingsService {
 		return List.of(userOrders);
 
 	}
+
 	public void removeOrder(HttpServletResponse response,
-	                         String authString,
-	                         Long orderParam){
+			String authString,
+			Long orderParam) {
 		Usuario usuarioDb = usuarioRepository.findUsuarioByAuth(authString).orElse(null);
 		UsuarioOrdem ordemDb = orderRepository.findOrderByOwnerId(usuarioDb.getId()).orElse(null);
 
-		if (usuarioDb  == null || ordemDb == null){
+		if (usuarioDb == null || ordemDb == null) {
 			response.setStatus(406);
 		}
-		if(usuarioDb.getId().equals(ordemDb.getUsuario().getId())){
+		if (usuarioDb.getId().equals(ordemDb.getUsuario().getId())) {
 			orderRepository.deleteById(ordemDb.getId());
 		}
 	}

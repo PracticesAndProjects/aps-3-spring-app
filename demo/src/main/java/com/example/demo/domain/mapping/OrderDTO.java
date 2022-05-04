@@ -1,4 +1,4 @@
-package com.example.demo.DTOs;
+package com.example.demo.domain.mapping;
 
 public class OrderDTO {
 	private boolean isAccepted;
@@ -13,15 +13,15 @@ public class OrderDTO {
 	private String listingCreatorEmail;
 
 	public OrderDTO(boolean isAccepted,
-	                Long orderOwnerId,
-	                String orderOwnerName,
-	                String orderOwnerEmail,
-	                String listingTitle,
-	                String listingUrl,
-	                String listingMaterialType,
-	                Long listingCreatorId,
-	                String listingCreatorName,
-	                String listingCreatorEmail) {
+			Long orderOwnerId,
+			String orderOwnerName,
+			String orderOwnerEmail,
+			String listingTitle,
+			String listingUrl,
+			String listingMaterialType,
+			Long listingCreatorId,
+			String listingCreatorName,
+			String listingCreatorEmail) {
 		this.isAccepted = isAccepted;
 		this.orderOwnerId = orderOwnerId;
 		this.orderOwnerName = orderOwnerName;

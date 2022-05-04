@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.demo.domain.mapping.DashboardUserData;
+
 @RestController
 @RequestMapping(path = "api/v1/dashboard", produces = "application/json")
 public class DashboardController {
@@ -15,13 +17,13 @@ public class DashboardController {
 	private DashboardService dashboardService;
 
 	@Autowired
-	public DashboardController(DashboardService dashboardService){
+	public DashboardController(DashboardService dashboardService) {
 		this.dashboardService = dashboardService;
 	}
 
 	@GetMapping
 	public DashboardUserData getUserData(@CookieValue(value = "token", defaultValue = "undefined") String authToken,
-	                                             HttpServletResponse response){
+			HttpServletResponse response) {
 		return dashboardService.getUserData(authToken, response);
 	}
 

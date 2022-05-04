@@ -1,6 +1,8 @@
 package com.example.demo.Dashboard;
 
 import com.example.demo.Repositories.UsuarioRepository;
+import com.example.demo.domain.mapping.DashboardUserData;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ public class DashboardService {
 	public UsuarioRepository usuarioRepository;
 
 	@Autowired
-	public DashboardService(UsuarioRepository usuarioRepository){
+	public DashboardService(UsuarioRepository usuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
 	}
 
@@ -21,7 +23,7 @@ public class DashboardService {
 
 		Optional<DashboardUserData> userOptional = usuarioRepository.findUsuarioByAuthList(authToken);
 
-		if (userOptional.isEmpty()){
+		if (userOptional.isEmpty()) {
 			response.setStatus(401);
 			return null;
 		}

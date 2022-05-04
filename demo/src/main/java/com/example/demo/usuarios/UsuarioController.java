@@ -1,7 +1,8 @@
 package com.example.demo.usuarios;
 
-import com.example.demo.DTOs.UsuarioPublicDTO;
 import com.example.demo.DbEntities.Usuario;
+import com.example.demo.domain.mapping.UsuarioPublicDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,24 +21,24 @@ public class UsuarioController {
 	}
 
 	@GetMapping
-	public List<Usuario> getUsuarios(){
+	public List<Usuario> getUsuarios() {
 		return usuarioService.getUsuarios();
 	}
 
 	@GetMapping(path = "{id}")
 	public UsuarioPublicDTO getPublicUserInfo(HttpServletResponse response,
-	                                          @CookieValue(value = "token", defaultValue = "undefined") String authString,
-	                                          @PathVariable("id") Long id){
+			@CookieValue(value = "token", defaultValue = "undefined") String authString,
+			@PathVariable("id") Long id) {
 		return usuarioService.getPublicUserInfo(response, authString, id);
 	}
 
 	@PostMapping
-	public void registerNewUsuario(@RequestBody Usuario usuario, HttpServletResponse response){
+	public void registerNewUsuario(@RequestBody Usuario usuario, HttpServletResponse response) {
 		usuarioService.addNewUsuario(usuario, response);
 	}
 
 	@DeleteMapping(path = "{studentId}")
-	public void deleteUsuario(@PathVariable("studentId") Long studentId){
+	public void deleteUsuario(@PathVariable("studentId") Long studentId) {
 		usuarioService.deleteUsuario(studentId);
 	}
 
@@ -45,8 +46,7 @@ public class UsuarioController {
 	public void updateUsuario(
 			@PathVariable("studentId") Long studentId,
 			@RequestParam(required = false) String name,
-			@RequestParam(required = false) String email
-	){
+			@RequestParam(required = false) String email) {
 		usuarioService.updateUsuario(studentId, name, email);
 	}
 

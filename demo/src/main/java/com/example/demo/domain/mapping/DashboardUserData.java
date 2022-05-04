@@ -1,4 +1,4 @@
-package com.example.demo.Dashboard;
+package com.example.demo.domain.mapping;
 
 import java.time.LocalDate;
 
@@ -13,13 +13,13 @@ public class DashboardUserData {
 	private String cpf_cnpj;
 
 	public DashboardUserData(String name,
-	                         String email,
-	                         LocalDate data_nasc,
-	                         int orcamento_total,
-	                         int orcamento_op,
-	                         String telefone,
-	                         String endereco,
-	                         String cpf_cnpj) {
+			String email,
+			LocalDate data_nasc,
+			int orcamento_total,
+			int orcamento_op,
+			String telefone,
+			String endereco,
+			String cpf_cnpj) {
 		this.name = name;
 		this.email = email;
 		this.data_nasc = data_nasc;
