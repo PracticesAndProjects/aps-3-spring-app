@@ -9,17 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping(path = "api/v1/user/signup", produces = "application/json")
+@RequestMapping(path = "api/v1/user/auth", produces = "application/json")
 public class LoginController {
-
-	private final LoginService loginService;
-
 	@Autowired
-	public LoginController(LoginService loginService) {
-		this.loginService = loginService;
-	}
+	private LoginService loginService;
 
-	@PostMapping
+	@PostMapping(path = "/signin")
 	public String loginPostMapping(HttpServletResponse response,
 			@CookieValue(value = "auth", defaultValue = "undefined") String authString,
 			@RequestBody Usuario usuario) {

@@ -1,6 +1,5 @@
 package com.aps.recycleplace.application.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +14,8 @@ import com.aps.recycleplace.implementation.services.DashboardService;
 @RestController
 @RequestMapping(path = "api/v1/dashboard", produces = "application/json")
 public class DashboardController {
-
-	private DashboardService dashboardService;
-
 	@Autowired
-	public DashboardController(DashboardService dashboardService) {
-		this.dashboardService = dashboardService;
-	}
+	private DashboardService dashboardService;
 
 	@GetMapping
 	public DashboardUserData getUserData(@CookieValue(value = "token", defaultValue = "undefined") String authToken,

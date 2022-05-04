@@ -11,22 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/usuarios")
+@RequestMapping(path = "api/v1/user")
 public class UsuarioController {
-
-	private final UsuarioService usuarioService;
-
 	@Autowired
-	public UsuarioController(UsuarioService usuarioService) {
-		this.usuarioService = usuarioService;
-	}
+	private UsuarioService usuarioService;
 
 	@GetMapping
 	public List<Usuario> getUsuarios() {
 		return usuarioService.getUsuarios();
 	}
 
-	@GetMapping(path = "{id}")
+	@GetMapping(path = "/{id}")
 	public UsuarioPublicDTO getPublicUserInfo(HttpServletResponse response,
 			@CookieValue(value = "token", defaultValue = "undefined") String authString,
 			@PathVariable("id") Long id) {
@@ -38,12 +33,12 @@ public class UsuarioController {
 		usuarioService.addNewUsuario(usuario, response);
 	}
 
-	@DeleteMapping(path = "{studentId}")
+	@DeleteMapping(path = "/{studentId}")
 	public void deleteUsuario(@PathVariable("studentId") Long studentId) {
 		usuarioService.deleteUsuario(studentId);
 	}
 
-	@PutMapping(path = "{studentId}")
+	@PutMapping(path = "/{studentId}")
 	public void updateUsuario(
 			@PathVariable("studentId") Long studentId,
 			@RequestParam(required = false) String name,
