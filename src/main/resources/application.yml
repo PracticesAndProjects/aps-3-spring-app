@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://ec2-35-168-194-15.compute-1.amazonaws.com:5432/dadnlbdbp80u6h
-    username: kiekrcbnosfqeh
-    password: cbd12b7368503d510c87d186e04538e735cf71cff6a496511433560133225460
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
     driverClassName: org.postgresql.Driver
 
   jpa:
@@ -11,14 +11,10 @@ spring:
       ddl-auto: create-drop
       show-sql: true
 
-  # h2:
-  #   console:
-  #     enabled: true
-  #     path: /h2
-
-
-
-
+# h2:
+#   console:
+#     enabled: true
+#     path: /h2
 # spring.datasource.url=jdbc:h2:mem:testdb
 # spring.datasource.username=sa
 # spring.datasource.password=
