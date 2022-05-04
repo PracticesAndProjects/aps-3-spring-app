@@ -1,7 +1,7 @@
-package com.example.demo.Dashboard;
+package com.example.demo.implementation.services;
 
-import com.example.demo.Repositories.UsuarioRepository;
 import com.example.demo.domain.mapping.DashboardUserData;
+import com.example.demo.infrastructure.persistence.repositories.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

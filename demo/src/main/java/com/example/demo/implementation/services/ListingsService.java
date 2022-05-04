@@ -1,13 +1,13 @@
-package com.example.demo.Listings;
+package com.example.demo.implementation.services;
 
-import com.example.demo.DbEntities.Listagem;
-import com.example.demo.DbEntities.UsuarioOrdem;
-import com.example.demo.Repositories.ListingsRepository;
-import com.example.demo.Repositories.OrderRepository;
-import com.example.demo.DbEntities.Usuario;
-import com.example.demo.Repositories.UsuarioRepository;
+import com.example.demo.domain.entities.Listagem;
+import com.example.demo.domain.entities.Usuario;
+import com.example.demo.domain.entities.UsuarioOrdem;
 import com.example.demo.domain.mapping.ListingsDTO;
 import com.example.demo.domain.mapping.OrderDTO;
+import com.example.demo.infrastructure.persistence.repositories.ListingsRepository;
+import com.example.demo.infrastructure.persistence.repositories.OrderRepository;
+import com.example.demo.infrastructure.persistence.repositories.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

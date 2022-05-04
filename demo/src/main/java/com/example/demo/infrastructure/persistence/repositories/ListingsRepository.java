@@ -1,14 +1,13 @@
-package com.example.demo.Repositories;
+package com.example.demo.infrastructure.persistence.repositories;
 
-import com.example.demo.DbEntities.Listagem;
+import com.example.demo.domain.DomainReferences;
+import com.example.demo.domain.entities.Listagem;
 import com.example.demo.domain.mapping.ListingsDTO;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import com.example.demo.Repositories.helpers.DomainReferences;
 
 import java.util.List;
 import java.util.Optional;

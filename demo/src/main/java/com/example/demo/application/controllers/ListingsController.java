@@ -1,8 +1,9 @@
-package com.example.demo.Listings;
+package com.example.demo.application.controllers;
 
-import com.example.demo.DbEntities.Listagem;
+import com.example.demo.domain.entities.Listagem;
 import com.example.demo.domain.mapping.ListingsDTO;
 import com.example.demo.domain.mapping.OrderDTO;
+import com.example.demo.implementation.services.ListingsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

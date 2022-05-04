@@ -1,4 +1,4 @@
-package com.example.demo.DbEntities;
+package com.example.demo.domain.entities;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,20 +8,13 @@ import java.util.List;
 public class Listagem {
 
 	@Id
-	@SequenceGenerator(
-			name = "listings_sequence",
-			sequenceName = "listings_sequence",
-			allocationSize = 1
-	)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "listings_sequence"
-	)
+	@SequenceGenerator(name = "listings_sequence", sequenceName = "listings_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "listings_sequence")
 	private Long id;
 	private String titulo;
 	private String img_url;
 	private String material_type;
-	private int delivery_type; //1: Conta do comprador, 2: Conta do vendedor
+	private int delivery_type; // 1: Conta do comprador, 2: Conta do vendedor
 	private int product_price;
 	private int delivery_median_price;
 	private int volume_dimension;
@@ -34,7 +27,6 @@ public class Listagem {
 	public Listagem() {
 	}
 
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -44,13 +36,13 @@ public class Listagem {
 	}
 
 	public Listagem(String titulo,
-	                String img_url,
-	                String material_type,
-	                int delivery_type,
-	                int product_price,
-	                int delivery_median_price,
-	                int volume_dimension,
-	                int weight_dimension) {
+			String img_url,
+			String material_type,
+			int delivery_type,
+			int product_price,
+			int delivery_median_price,
+			int volume_dimension,
+			int weight_dimension) {
 		this.titulo = titulo;
 		this.img_url = img_url;
 		this.material_type = material_type;
@@ -126,8 +118,4 @@ public class Listagem {
 		this.weight_dimension = weight_dimension;
 	}
 
-
-
 }
-
-

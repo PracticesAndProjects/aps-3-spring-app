@@ -1,9 +1,9 @@
-package com.example.demo.usuarios;
+package com.example.demo.implementation.services;
 
-import com.example.demo.Authentication.TokenGenerator;
-import com.example.demo.DbEntities.Usuario;
-import com.example.demo.Repositories.UsuarioRepository;
+import com.example.demo.domain.entities.Usuario;
 import com.example.demo.domain.mapping.UsuarioPublicDTO;
+import com.example.demo.implementation.services.common.TokenGenerator;
+import com.example.demo.infrastructure.persistence.repositories.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

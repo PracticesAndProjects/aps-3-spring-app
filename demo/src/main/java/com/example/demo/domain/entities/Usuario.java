@@ -1,4 +1,4 @@
-package com.example.demo.DbEntities;
+package com.example.demo.domain.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,15 +9,8 @@ import java.util.List;
 @Table
 public class Usuario {
 	@Id
-	@SequenceGenerator(
-			name = "usuario_sequence",
-			sequenceName = "usuario_sequence",
-			allocationSize = 1
-	)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "usuario_sequence"
-	)
+	@SequenceGenerator(name = "usuario_sequence", sequenceName = "usuario_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_sequence")
 	private Long id;
 	private String nome;
 	private String email;
@@ -35,16 +28,15 @@ public class Usuario {
 	public Usuario() {
 	}
 
-
 	public Usuario(Long id,
-	               String nome,
-	               String email,
-	               LocalDate data_nasc,
-	               int orcamento_total,
-	               int orcamento_op,
-	               String telefone,
-	               String endereco,
-	               String cpf_cnpj) {
+			String nome,
+			String email,
+			LocalDate data_nasc,
+			int orcamento_total,
+			int orcamento_op,
+			String telefone,
+			String endereco,
+			String cpf_cnpj) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -57,15 +49,15 @@ public class Usuario {
 	}
 
 	public Usuario(String nome,
-	               String email,
-	               LocalDate data_nasc,
-	               int orcamento_total,
-	               int orcamento_op,
-	               String telefone,
-	               String endereco,
-	               String cpf_cnpj,
-	               String token,
-	               String senha) {
+			String email,
+			LocalDate data_nasc,
+			int orcamento_total,
+			int orcamento_op,
+			String telefone,
+			String endereco,
+			String cpf_cnpj,
+			String token,
+			String senha) {
 		this.nome = nome;
 		this.email = email;
 		this.data_nasc = data_nasc;
@@ -78,22 +70,21 @@ public class Usuario {
 		this.token = token;
 	}
 
-	public Usuario(String email, String senha, String token){
+	public Usuario(String email, String senha, String token) {
 		this.email = email;
 		this.senha = senha;
 		this.token = token;
 	}
 
-
 	public Usuario(String nome,
-	               String email,
-	               String senha,
-	               LocalDate data_nasc,
-	               int orcamento_total,
-	               int orcamento_op,
-	               String telefone,
-	               String endereco,
-	               String cpf_cnpj) {
+			String email,
+			String senha,
+			LocalDate data_nasc,
+			int orcamento_total,
+			int orcamento_op,
+			String telefone,
+			String endereco,
+			String cpf_cnpj) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;

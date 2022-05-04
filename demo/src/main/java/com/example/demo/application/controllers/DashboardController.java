@@ -1,4 +1,4 @@
-package com.example.demo.Dashboard;
+package com.example.demo.application.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.demo.domain.mapping.DashboardUserData;
+import com.example.demo.implementation.services.DashboardService;
 
 @RestController
 @RequestMapping(path = "api/v1/dashboard", produces = "application/json")

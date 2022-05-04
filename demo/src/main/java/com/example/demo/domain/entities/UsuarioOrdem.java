@@ -1,4 +1,4 @@
-package com.example.demo.DbEntities;
+package com.example.demo.domain.entities;
 
 import javax.persistence.*;
 
@@ -6,15 +6,8 @@ import javax.persistence.*;
 @Table
 public class UsuarioOrdem {
 	@Id
-	@SequenceGenerator(
-			name = "_orders_sequence",
-			sequenceName = "_orders_sequence",
-			allocationSize = 1
-	)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "_orders_sequence"
-	)
+	@SequenceGenerator(name = "_orders_sequence", sequenceName = "_orders_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "_orders_sequence")
 	private Long id;
 	private boolean isAccepted;
 
@@ -61,4 +54,3 @@ public class UsuarioOrdem {
 		isAccepted = accepted;
 	}
 }
-

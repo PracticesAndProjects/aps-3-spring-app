@@ -1,4 +1,4 @@
-package com.example.demo.Repositories.helpers;
+package com.example.demo.domain;
 
 public class DomainReferences {
     public class Mapping {

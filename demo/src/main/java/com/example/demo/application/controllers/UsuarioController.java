@@ -1,7 +1,8 @@
-package com.example.demo.usuarios;
+package com.example.demo.application.controllers;
 
-import com.example.demo.DbEntities.Usuario;
+import com.example.demo.domain.entities.Usuario;
 import com.example.demo.domain.mapping.UsuarioPublicDTO;
+import com.example.demo.implementation.services.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

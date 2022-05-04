@@ -1,7 +1,7 @@
-package com.example.demo.Repositories;
+package com.example.demo.infrastructure.persistence.repositories;
 
-import com.example.demo.DbEntities.UsuarioOrdem;
-import com.example.demo.Repositories.helpers.DomainReferences;
+import com.example.demo.domain.DomainReferences;
+import com.example.demo.domain.entities.UsuarioOrdem;
 import com.example.demo.domain.mapping.OrderDTO;
 
 import org.springframework.data.jpa.repository.JpaRepository;

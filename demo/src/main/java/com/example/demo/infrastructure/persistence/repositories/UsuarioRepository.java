@@ -1,7 +1,7 @@
-package com.example.demo.Repositories;
+package com.example.demo.infrastructure.persistence.repositories;
 
-import com.example.demo.DbEntities.Usuario;
-import com.example.demo.Repositories.helpers.DomainReferences;
+import com.example.demo.domain.DomainReferences;
+import com.example.demo.domain.entities.Usuario;
 import com.example.demo.domain.mapping.DashboardUserData;
 import com.example.demo.domain.mapping.UsuarioPublicDTO;
 

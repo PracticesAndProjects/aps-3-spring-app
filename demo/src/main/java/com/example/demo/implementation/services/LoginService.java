@@ -1,7 +1,9 @@
-package com.example.demo.Authentication;
+package com.example.demo.implementation.services;
 
-import com.example.demo.DbEntities.Usuario;
-import com.example.demo.Repositories.UsuarioRepository;
+import com.example.demo.domain.entities.Usuario;
+import com.example.demo.implementation.services.common.TokenGenerator;
+import com.example.demo.infrastructure.persistence.repositories.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -21,15 +23,17 @@ public class LoginService {
 	}
 
 	@Transactional
-	public String doLogin(HttpServletResponse response, Usuario usuario){
+	public String doLogin(HttpServletResponse response, Usuario usuario) {
 
-//		Optional<Usuario> UsuarioEmailandSenhaOptional = usuarioRepository.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha());
+		// Optional<Usuario> UsuarioEmailandSenhaOptional =
+		// usuarioRepository.findUsuarioByEmailandSenha(usuario.getEmail(),
+		// usuario.getSenha());
 
 		Usuario usuariodb = usuarioRepository
 				.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha())
 				.orElse(null);
 
-		if (usuariodb == null){
+		if (usuariodb == null) {
 			response.setStatus(401);
 			return null;
 		}
@@ -43,18 +47,18 @@ public class LoginService {
 		cookieLogado.setHttpOnly(true);
 		cookieLogado.setSecure(true);
 
-
 		return TokenGenerator.token(token);
 
 	}
 
-	public void checkAuth(HttpServletResponse response, @CookieValue(value = "auth", defaultValue = "undefined") String cookie){
+	public void checkAuth(HttpServletResponse response,
+			@CookieValue(value = "auth", defaultValue = "undefined") String cookie) {
 
 		Usuario usuariodb = usuarioRepository
 				.findUsuarioByAuth(cookie)
 				.orElse(null);
 
-		if(cookie.equals("undefined") | usuariodb == null ){
+		if (cookie.equals("undefined") | usuariodb == null) {
 			response.setStatus(401);
 		}
 	}
