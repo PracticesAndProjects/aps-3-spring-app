@@ -12,21 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/user/listings")
+@RequestMapping(path = "api/v1/listings")
 public class ListingsController {
-
-	private final ListingsService listingsService;
-
 	@Autowired
-	public ListingsController(ListingsService listingsService) {
-		this.listingsService = listingsService;
-	}
+	private ListingsService listingsService;
 
 	@PostMapping
 	public void addListings(HttpServletResponse response,
 			@RequestBody Listagem listingObj,
 			@CookieValue(value = "token", defaultValue = "undefined") String authString) {
 		listingsService.addNewListings(response, listingObj, authString);
+	}
+
+	@GetMapping
+	public List<ListingsDTO> getListingsSearch(HttpServletResponse response,
+			@CookieValue(value = "token", defaultValue = "undefined") String authString,
+			@RequestParam(name = "search", required = false) String searchParam) {
+		return listingsService.getListingsBySearch(response, authString, searchParam);
 	}
 
 	@DeleteMapping(path = "/{listingId}")
@@ -38,27 +40,20 @@ public class ListingsController {
 				authString);
 	}
 
-	@GetMapping
-	public List<ListingsDTO> getListingsSearch(HttpServletResponse response,
-			@CookieValue(value = "token", defaultValue = "undefined") String authString,
-			@RequestParam(name = "search", required = false) String searchParam) {
-		return listingsService.getListingsBySearch(response, authString, searchParam);
-	}
-
-	@PostMapping(path = "order")
+	@PostMapping(path = "/order")
 	public void orderList(HttpServletResponse response,
 			@CookieValue(value = "token", defaultValue = "undefined") String authString,
 			@RequestParam(name = "listingid") Long id) {
 		listingsService.createOrder(response, authString, id);
 	}
 
-	@GetMapping(path = "order")
+	@GetMapping(path = "/order")
 	public List<OrderDTO> getOrders(HttpServletResponse response,
 			@CookieValue(value = "token", defaultValue = "undefined") String authString) {
 		return listingsService.getMyOrders(response, authString);
 	}
 
-	@DeleteMapping(path = "order")
+	@DeleteMapping(path = "/order")
 	public void deleteOrders(HttpServletResponse response,
 			@CookieValue(value = "token", defaultValue = "undefined") String authString,
 			@RequestParam("order") Long orderParam) {
