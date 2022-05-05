@@ -1,9 +1,13 @@
 package com.aps.recycleplace.domain.entities;
 
+
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
 
 @Entity
 @Table
@@ -12,15 +16,35 @@ public class Usuario {
 	@SequenceGenerator(name = "usuario_sequence", sequenceName = "usuario_sequence", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_sequence")
 	private Long id;
+	@NotNull
+	@Size(min = 3)
 	private String nome;
+
+	@NotNull
+	@Size(min = 4)
 	private String email;
+
+	@NotNull
+	@Size(min = 6)
 	private String senha;
 	private String token;
+
+	@NotNull
 	private LocalDate data_nasc;
+
+	@NotNull
 	private int orcamento_total;
+
+	@NotNull
 	private int orcamento_op;
+
+	@NotNull
 	private String telefone;
+
+	@NotNull
 	private String endereco;
+
+	@NotNull
 	private String cpf_cnpj;
 	@Transient
 	private Integer idade;

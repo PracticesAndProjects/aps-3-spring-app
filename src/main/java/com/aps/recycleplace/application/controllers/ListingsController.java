@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class ListingsController {
 
 	@PostMapping
 	public void addListings(HttpServletResponse response,
-			@RequestBody Listagem listingObj,
+			@Valid @RequestBody Listagem listingObj,
 			@CookieValue(value = "token", defaultValue = "undefined") String authString) {
 		listingsService.addNewListings(response, listingObj, authString);
 	}

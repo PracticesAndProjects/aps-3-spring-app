@@ -1,6 +1,7 @@
 package com.aps.recycleplace.domain.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -10,14 +11,32 @@ public class Listagem {
 	@SequenceGenerator(name = "listings_sequence", sequenceName = "listings_sequence", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "listings_sequence")
 	private Long id;
+
+	@NotNull
 	private String titulo;
+
+	@NotNull
 	private String img_url;
+
+	@NotNull
 	private String material_type;
-	private int delivery_type; // 1: Conta do comprador, 2: Conta do vendedor
+
+	@NotNull
+	private int delivery_type;
+
+	@NotNull// 1: Conta do comprador, 2: Conta do vendedor
 	private int product_price;
+
+	@NotNull
 	private int delivery_median_price;
+
+	@NotNull
 	private int volume_dimension;
+
+	@NotNull
 	private int weight_dimension;
+
+	@NotNull
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")

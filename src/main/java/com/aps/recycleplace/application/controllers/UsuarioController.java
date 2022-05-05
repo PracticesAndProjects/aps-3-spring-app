@@ -3,11 +3,11 @@ package com.aps.recycleplace.application.controllers;
 import com.aps.recycleplace.domain.entities.Usuario;
 import com.aps.recycleplace.domain.mapping.UsuarioPublicDTO;
 import com.aps.recycleplace.implementation.services.UsuarioService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,7 +29,7 @@ public class UsuarioController {
 	}
 
 	@PostMapping
-	public void registerNewUsuario(@RequestBody Usuario usuario, HttpServletResponse response) {
+	public void registerNewUsuario(@Valid @RequestBody Usuario usuario, HttpServletResponse response) {
 		usuarioService.addNewUsuario(usuario, response);
 	}
 
