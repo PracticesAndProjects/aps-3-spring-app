@@ -13,14 +13,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/listings")
+@RequestMapping(path = "/v1/listings")
 public class ListingsController {
 	@Autowired
 	private ListingsService listingsService;
 
 	@PostMapping
-	public void addListings(HttpServletResponse response,
-			@Valid @RequestBody Listagem listingObj,
+	public void addListings(HttpServletResponse response, @Valid @RequestBody Listagem listingObj,
 			@CookieValue(value = "token", defaultValue = "undefined") String authString) {
 		listingsService.addNewListings(response, listingObj, authString);
 	}
@@ -36,9 +35,7 @@ public class ListingsController {
 	public void removeListings(HttpServletResponse response,
 			@PathVariable("listingId") Long listingId,
 			@CookieValue(value = "token", defaultValue = "undefined") String authString) {
-		listingsService.removeListings(response,
-				listingId,
-				authString);
+		listingsService.removeListings(response, listingId, authString);
 	}
 
 	@PostMapping(path = "/order")

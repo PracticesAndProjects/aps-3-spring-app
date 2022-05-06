@@ -12,13 +12,14 @@ import com.aps.recycleplace.domain.mapping.DashboardUserData;
 import com.aps.recycleplace.implementation.services.DashboardService;
 
 @RestController
-@RequestMapping(path = "api/v1/dashboard", produces = "application/json")
+@RequestMapping(path = "/v1/dashboard", produces = "application/json")
 public class DashboardController {
 	@Autowired
 	private DashboardService dashboardService;
 
 	@GetMapping
-	public DashboardUserData getUserData(@CookieValue(value = "token", defaultValue = "undefined") String authToken,
+	public DashboardUserData getUserData(
+			@CookieValue(value = "token", defaultValue = "undefined") String authToken,
 			HttpServletResponse response) {
 		return dashboardService.getUserData(authToken, response);
 	}

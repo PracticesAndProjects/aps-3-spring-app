@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/user")
+@RequestMapping(path = "/v1/user")
 public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
@@ -29,7 +29,8 @@ public class UsuarioController {
 	}
 
 	@PostMapping
-	public void registerNewUsuario(@Valid @RequestBody Usuario usuario, HttpServletResponse response) {
+	public void registerNewUsuario(@Valid @RequestBody Usuario usuario,
+			HttpServletResponse response) {
 		usuarioService.addNewUsuario(usuario, response);
 	}
 
@@ -39,10 +40,8 @@ public class UsuarioController {
 	}
 
 	@PutMapping(path = "/{studentId}")
-	public void updateUsuario(
-			@PathVariable("studentId") Long studentId,
-			@RequestParam(required = false) String name,
-			@RequestParam(required = false) String email) {
+	public void updateUsuario(@PathVariable("studentId") Long studentId,
+			@RequestParam(required = false) String name, @RequestParam(required = false) String email) {
 		usuarioService.updateUsuario(studentId, name, email);
 	}
 

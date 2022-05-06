@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping(path = "api/v1/user/auth", produces = "application/json")
+@RequestMapping(path = "/v1/user/auth", produces = "application/json")
 public class LoginController {
 	@Autowired
 	private LoginService loginService;
