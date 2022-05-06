@@ -39,7 +39,7 @@ public class UsuarioController {
 		usuarioService.deleteUsuario(studentId);
 	}
 
-	@PutMapping(path = "/{studentId}")
+	@PatchMapping(path = "/{studentId}")
 	public void updateUsuario(@PathVariable("studentId") Long studentId,
 			@RequestParam(required = false) String name, @RequestParam(required = false) String email) {
 		usuarioService.updateUsuario(studentId, name, email);

@@ -2,8 +2,32 @@ body{
 	background-color: #458860;
 }
 
+h3 {
+	margin-bottom: 1rem;
+}
+
+p { 
+	margin: 0;
+}
+p.body-1 {
+	margin: 0;
+	margin-bottom: 1rem;
+}
+
+p.text-payload {
+	font-family: monospace;
+}
+
 nav.navbar{
 	background-color: #5BB27E;
+}
+
+h4 {
+	color: #4ea16f;
+	font-weight: bold;
+	font-size: 1.5rem;
+	margin: 0;
+	margin-bottom: 0.3rem;
 }
 
 .navbar-btns *{
