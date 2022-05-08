@@ -23,43 +23,47 @@ public class LoginService {
 	}
 
 	@Transactional
-	public String doLogin(HttpServletResponse response, Usuario usuario) {
-
-		// Optional<Usuario> UsuarioEmailandSenhaOptional =
-		// usuarioRepository.findUsuarioByEmailandSenha(usuario.getEmail(),
-		// usuario.getSenha());
+	public void doLogin(HttpServletResponse response, Usuario usuario, String authString) {
 
 		Usuario usuariodb = usuarioRepository
 				.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha())
 				.orElse(null);
 
 		if (usuariodb == null) {
-			response.setStatus(401);
-			return null;
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
+
+		if (!authString.equals("undefined") && usuariodb.getToken().equals(authString)){
+			response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+			return;
 		}
 
 		String token = TokenGenerator.generateNewToken();
 		usuario.setToken(token);
 		usuariodb.setToken(token);
 
-		Cookie cookieLogado = new Cookie("auth", token);
+		Cookie cookieLogado = new Cookie("token", token);
 		cookieLogado.setMaxAge(9999);
 		cookieLogado.setHttpOnly(true);
 		cookieLogado.setSecure(true);
+		response.addCookie(cookieLogado);
+		response.setStatus(HttpServletResponse.SC_OK);
 
-		return TokenGenerator.token(token);
 
 	}
 
-	public void checkAuth(HttpServletResponse response,
-			@CookieValue(value = "auth", defaultValue = "undefined") String cookie) {
+	public boolean checkAuth(HttpServletResponse response,
+			String authString) {
 
 		Usuario usuariodb = usuarioRepository
-				.findUsuarioByAuth(cookie)
+				.findUsuarioByAuth(authString)
 				.orElse(null);
 
-		if (cookie.equals("undefined") | usuariodb == null) {
+		if (authString.equals("undefined") || usuariodb == null || !authString.equals(usuariodb.getToken())) {
 			response.setStatus(401);
+			return false;
 		}
+		return true;
 	}
 }

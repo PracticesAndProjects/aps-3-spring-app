@@ -15,16 +15,10 @@ public class LoginController {
 	private LoginService loginService;
 
 	@PostMapping(path = "/signin")
-	public String loginPostMapping(HttpServletResponse response,
-			@CookieValue(value = "auth", defaultValue = "undefined") String authString,
+	public void loginPostMapping(HttpServletResponse response,
+			@CookieValue(value = "token", defaultValue = "undefined") String authString,
 			@RequestBody Usuario usuario) {
-
-		if (authString.equals("undefined")) {
-			return loginService.doLogin(response, usuario);
-		} else {
-			response.setStatus(401);
-			return null;
-		}
+		loginService.doLogin(response, usuario, authString);
 	}
 
 }
