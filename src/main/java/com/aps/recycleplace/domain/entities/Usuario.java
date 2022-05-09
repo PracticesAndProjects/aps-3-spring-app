@@ -1,8 +1,5 @@
 package com.aps.recycleplace.domain.entities;
 
-
-import org.springframework.lang.NonNull;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,7 +10,8 @@ import java.time.Period;
 @Table
 public class Usuario {
 	@Id
-	@SequenceGenerator(name = "usuario_sequence", sequenceName = "usuario_sequence", allocationSize = 1)
+	@SequenceGenerator(name = "usuario_sequence", sequenceName = "usuario_sequence",
+			allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_sequence")
 	private Long id;
 	@NotNull
@@ -49,18 +47,10 @@ public class Usuario {
 	@Transient
 	private Integer idade;
 
-	public Usuario() {
-	}
+	public Usuario() {}
 
-	public Usuario(Long id,
-			String nome,
-			String email,
-			LocalDate data_nasc,
-			int orcamento_total,
-			int orcamento_op,
-			String telefone,
-			String endereco,
-			String cpf_cnpj) {
+	public Usuario(Long id, String nome, String email, LocalDate data_nasc, int orcamento_total,
+			int orcamento_op, String telefone, String endereco, String cpf_cnpj) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -72,15 +62,8 @@ public class Usuario {
 		this.cpf_cnpj = cpf_cnpj;
 	}
 
-	public Usuario(String nome,
-			String email,
-			LocalDate data_nasc,
-			int orcamento_total,
-			int orcamento_op,
-			String telefone,
-			String endereco,
-			String cpf_cnpj,
-			String token,
+	public Usuario(String nome, String email, LocalDate data_nasc, int orcamento_total,
+			int orcamento_op, String telefone, String endereco, String cpf_cnpj, String token,
 			String senha) {
 		this.nome = nome;
 		this.email = email;
@@ -100,15 +83,8 @@ public class Usuario {
 		this.token = token;
 	}
 
-	public Usuario(String nome,
-			String email,
-			String senha,
-			LocalDate data_nasc,
-			int orcamento_total,
-			int orcamento_op,
-			String telefone,
-			String endereco,
-			String cpf_cnpj) {
+	public Usuario(String nome, String email, String senha, LocalDate data_nasc, int orcamento_total,
+			int orcamento_op, String telefone, String endereco, String cpf_cnpj) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
@@ -218,18 +194,10 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario{" +
-				"id=" + id +
-				", name='" + nome + '\'' +
-				", email='" + email + '\'' +
-				", data_nasc=" + data_nasc +
-				", orcamento_total=" + orcamento_total +
-				", orcamento_op=" + orcamento_op +
-				", telefone='" + telefone + '\'' +
-				", endereco='" + endereco + '\'' +
-				", cpf_cnpj='" + cpf_cnpj + '\'' +
-				", idade=" + idade +
-				'}';
+		return "Usuario{" + "id=" + id + ", name='" + nome + '\'' + ", email='" + email + '\''
+				+ ", data_nasc=" + data_nasc + ", orcamento_total=" + orcamento_total + ", orcamento_op="
+				+ orcamento_op + ", telefone='" + telefone + '\'' + ", endereco='" + endereco + '\''
+				+ ", cpf_cnpj='" + cpf_cnpj + '\'' + ", idade=" + idade + '}';
 	}
 
 }
