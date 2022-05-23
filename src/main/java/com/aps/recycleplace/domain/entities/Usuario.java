@@ -1,6 +1,6 @@
 package com.aps.recycleplace.domain.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,7 +30,7 @@ public class Usuario {
 
 	private String token;
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
+
 	@NotNull
 	private LocalDate data_nasc;
 
@@ -82,7 +82,7 @@ public class Usuario {
 		this.endereco = endereco;
 		this.cpf_cnpj = cpf_cnpj;
 		this.token = token;
-    this.senha = senha;
+		this.senha = senha;
 		this.idType = idType;
 	}
 
