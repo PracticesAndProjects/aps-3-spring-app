@@ -6,7 +6,8 @@ import javax.persistence.*;
 @Table
 public class UsuarioOrdem {
 	@Id
-	@SequenceGenerator(name = "_orders_sequence", sequenceName = "_orders_sequence", allocationSize = 1)
+	@SequenceGenerator(name = "_orders_sequence", sequenceName = "_orders_sequence",
+			allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "_orders_sequence")
 	private Long id;
 	private boolean isAccepted;
@@ -19,8 +20,7 @@ public class UsuarioOrdem {
 	@JoinColumn(name = "listing_id")
 	private Listagem listing_ordem;
 
-	public UsuarioOrdem() {
-	}
+	public UsuarioOrdem() {}
 
 	public Long getId() {
 		return id;

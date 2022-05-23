@@ -18,32 +18,15 @@ public class UsuarioConfig {
 	@Bean
 	CommandLineRunner commandLineRunner(UsuarioRepository repository) {
 		return args -> {
-			Usuario mariam = new Usuario(
-					"Mariam",
-					"mariam.jamal@gmail.com",
-					LocalDate.of(2000, JANUARY, 5),
-					2000,
-					1000,
-					"9 9999 9999",
-					"Rua tal, numero tal, bairro tal",
-					"111.111.111-11",
-					"111",
-					"123456");
+			Usuario mariam = new Usuario("Mariam", "mariam.jamal@gmail.com",
+					LocalDate.of(2000, JANUARY, 5), 2000, 1000, "9 9999 9999",
+					"Rua tal, numero tal, bairro tal", "111.111.111-11", "111", "123456", 1);
 
-			Usuario alex = new Usuario(
-					"Alex",
-					"alex@gmail.com",
-					LocalDate.of(2004, JANUARY, 5),
-					2000,
-					1000,
-					"9 9999 9999",
-					"Rua tal, numero tal, bairro tal",
-					"111.111.111-11",
-					"222",
-					"123456");
+			Usuario alex = new Usuario("Alex", "alex@gmail.com", LocalDate.of(2004, JANUARY, 5), 2000,
+					1000, "9 9999 9999", "Rua tal, numero tal, bairro tal", "111.111.111-11", "222", "123456",
+					1);
 
-			repository.saveAll(
-					List.of(mariam, alex));
+			// repository.saveAll(List.of(mariam, alex));
 		};
 
 	}

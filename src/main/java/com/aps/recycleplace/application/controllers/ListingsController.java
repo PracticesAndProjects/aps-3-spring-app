@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/v1/listings")
 public class ListingsController {
@@ -20,42 +21,41 @@ public class ListingsController {
 
 	@PostMapping
 	public void addListings(HttpServletResponse response, @Valid @RequestBody Listagem listingObj,
-			@CookieValue(value = "token", defaultValue = "undefined") String authString) {
-		listingsService.addNewListings(response, listingObj, authString);
+			@RequestHeader(name = "Authorization", required = true) String Bearer) {
+		listingsService.addNewListings(response, listingObj, Bearer);
 	}
 
 	@GetMapping
-	public List<ListingsDTO> getListingsSearch(HttpServletResponse response,
-			@CookieValue(value = "token", defaultValue = "undefined") String authString,
-			@RequestParam(name = "search", required = false) String searchParam) {
-		return listingsService.getListingsBySearch(response, authString, searchParam);
+	public List<Listagem> getListingsSearch(HttpServletResponse response,
+			@RequestHeader(name = "Authorization") String Bearer) {
+		return listingsService.getAllListings(response, Bearer);
 	}
 
 	@DeleteMapping(path = "/{listingId}")
 	public void removeListings(HttpServletResponse response,
 			@PathVariable("listingId") Long listingId,
-			@CookieValue(value = "token", defaultValue = "undefined") String authString) {
-		listingsService.removeListings(response, listingId, authString);
+			@RequestHeader(name = "Authorization", required = true) String Bearer) {
+		listingsService.removeListings(response, listingId, Bearer);
 	}
 
-	@PostMapping(path = "/order")
+	@PostMapping(path = "/order/{listingId}")
 	public void orderList(HttpServletResponse response,
-			@CookieValue(value = "token", defaultValue = "undefined") String authString,
-			@RequestParam(name = "listingid") Long id) {
-		listingsService.createOrder(response, authString, id);
+			@RequestHeader(name = "Authorization", required = true) String Bearer,
+			@PathVariable("listingId") Long listingId) {
+		listingsService.createOrder(response, Bearer, listingId);
 	}
 
 	@GetMapping(path = "/order")
 	public List<OrderDTO> getOrders(HttpServletResponse response,
-			@CookieValue(value = "token", defaultValue = "undefined") String authString) {
-		return listingsService.getMyOrders(response, authString);
+			@RequestHeader(name = "Authorization", required = true) String Bearer) {
+		return listingsService.getMyOrders(response, Bearer);
 	}
 
-	@DeleteMapping(path = "/order")
+	@DeleteMapping(path = "/order/{orderId}")
 	public void deleteOrders(HttpServletResponse response,
-			@CookieValue(value = "token", defaultValue = "undefined") String authString,
-			@RequestParam("order") Long orderParam) {
-		listingsService.removeOrder(response, authString, orderParam);
+			@RequestHeader(name = "Authorization", required = true) String Bearer,
+			@PathVariable("orderId") Long orderId) {
+		listingsService.removeOrder(response, Bearer, orderId);
 	}
 
 	// https://stackoverflow.com/questions/21456494/spring-jpa-query-with-like

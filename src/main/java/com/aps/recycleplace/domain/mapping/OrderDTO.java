@@ -12,16 +12,9 @@ public class OrderDTO {
 	private String listingCreatorName;
 	private String listingCreatorEmail;
 
-	public OrderDTO(boolean isAccepted,
-			Long orderOwnerId,
-			String orderOwnerName,
-			String orderOwnerEmail,
-			String listingTitle,
-			String listingUrl,
-			String listingMaterialType,
-			Long listingCreatorId,
-			String listingCreatorName,
-			String listingCreatorEmail) {
+	public OrderDTO(boolean isAccepted, Long orderOwnerId, String orderOwnerName,
+			String orderOwnerEmail, String listingTitle, String listingUrl, String listingMaterialType,
+			Long listingCreatorId, String listingCreatorName, String listingCreatorEmail) {
 		this.isAccepted = isAccepted;
 		this.orderOwnerId = orderOwnerId;
 		this.orderOwnerName = orderOwnerName;
