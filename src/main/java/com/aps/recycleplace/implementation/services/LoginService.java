@@ -30,6 +30,7 @@ public class LoginService {
 		String newToken = TokenGenerator.generateNewToken();
 
 		if (usuariodb == null) {
+			response.setStatus(401);
 			return null;
 		}
 
