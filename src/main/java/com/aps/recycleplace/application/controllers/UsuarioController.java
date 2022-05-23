@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(path = "/v1/user")
+@RequestMapping(path = "/v1/users")
 public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;

@@ -8,7 +8,8 @@ import javax.validation.constraints.NotNull;
 public class Listagem {
 
 	@Id
-	@SequenceGenerator(name = "listings_sequence", sequenceName = "listings_sequence", allocationSize = 1)
+	@SequenceGenerator(name = "listings_sequence", sequenceName = "listings_sequence",
+			allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "listings_sequence")
 	private Long id;
 
@@ -24,7 +25,7 @@ public class Listagem {
 	@NotNull
 	private int delivery_type;
 
-	@NotNull// 1: Conta do comprador, 2: Conta do vendedor
+	@NotNull // 1: Conta do comprador, 2: Conta do vendedor
 	private int product_price;
 
 	@NotNull
@@ -36,13 +37,14 @@ public class Listagem {
 	@NotNull
 	private int weight_dimension;
 
-	@NotNull
-
 	@ManyToOne
-	@JoinColumn(name = "usuario_id")
+	@JoinColumn(name = "usuario_id", nullable = false)
 	private Usuario usuario;
 
-	public Listagem() {
+	public Listagem() {}
+
+	public Long getId() {
+		return id;
 	}
 
 	public Usuario getUsuario() {
@@ -53,14 +55,8 @@ public class Listagem {
 		this.usuario = usuario;
 	}
 
-	public Listagem(String titulo,
-			String img_url,
-			String material_type,
-			int delivery_type,
-			int product_price,
-			int delivery_median_price,
-			int volume_dimension,
-			int weight_dimension) {
+	public Listagem(String titulo, String img_url, String material_type, int delivery_type,
+			int product_price, int delivery_median_price, int volume_dimension, int weight_dimension) {
 		this.titulo = titulo;
 		this.img_url = img_url;
 		this.material_type = material_type;

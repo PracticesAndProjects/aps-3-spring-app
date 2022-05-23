@@ -1,13 +1,14 @@
 package com.aps.recycleplace.implementation.services;
 
 import com.aps.recycleplace.domain.entities.Usuario;
+import com.aps.recycleplace.domain.mapping.UserAuthDTO;
 import com.aps.recycleplace.implementation.services.common.TokenGenerator;
 import com.aps.recycleplace.infrastructure.persistence.repositories.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CookieValue;
-
+import antlr.Token;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
@@ -23,40 +24,32 @@ public class LoginService {
 	}
 
 	@Transactional
-	public String doLogin(HttpServletResponse response, Usuario usuario) {
-
-		// Optional<Usuario> UsuarioEmailandSenhaOptional =
-		// usuarioRepository.findUsuarioByEmailandSenha(usuario.getEmail(),
-		// usuario.getSenha());
+	public UserAuthDTO doLogin(HttpServletResponse response, Usuario usuario) {
 
 		Usuario usuariodb = usuarioRepository
-				.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha())
-				.orElse(null);
+				.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha()).orElse(null);
 
 		if (usuariodb == null) {
-			response.setStatus(401);
+			response.setStatus(404);
 			return null;
 		}
+		String newToken = TokenGenerator.generateNewToken();
 
-		String token = TokenGenerator.generateNewToken();
-		usuario.setToken(token);
-		usuariodb.setToken(token);
+		usuario.setToken(newToken);
+		usuariodb.setToken(newToken);
 
-		Cookie cookieLogado = new Cookie("auth", token);
-		cookieLogado.setMaxAge(9999);
-		cookieLogado.setHttpOnly(true);
-		cookieLogado.setSecure(true);
+		// Cookie cookieSignin = new Cookie("token", newToken);
+		// cookieSignin.setMaxAge(9999);
+		// cookieSignin.setPath("/");
+		// response.addCookie(cookieSignin);
 
-		return TokenGenerator.token(token);
-
+		return new UserAuthDTO(usuariodb.getEmail(), usuariodb.getNome(), newToken, usuariodb.getId());
 	}
 
 	public void checkAuth(HttpServletResponse response,
 			@CookieValue(value = "auth", defaultValue = "undefined") String cookie) {
 
-		Usuario usuariodb = usuarioRepository
-				.findUsuarioByAuth(cookie)
-				.orElse(null);
+		Usuario usuariodb = usuarioRepository.findUsuarioByAuth(cookie).orElse(null);
 
 		if (cookie.equals("undefined") | usuariodb == null) {
 			response.setStatus(401);

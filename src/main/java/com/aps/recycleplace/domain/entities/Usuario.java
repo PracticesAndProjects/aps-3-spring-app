@@ -47,10 +47,13 @@ public class Usuario {
 	@Transient
 	private Integer idade;
 
+	@NotNull
+	private int idType;
+
 	public Usuario() {}
 
 	public Usuario(Long id, String nome, String email, LocalDate data_nasc, int orcamento_total,
-			int orcamento_op, String telefone, String endereco, String cpf_cnpj) {
+			int orcamento_op, String telefone, String endereco, String cpf_cnpj, int idType) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -60,11 +63,12 @@ public class Usuario {
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.cpf_cnpj = cpf_cnpj;
+		this.idType = idType;
 	}
 
 	public Usuario(String nome, String email, LocalDate data_nasc, int orcamento_total,
 			int orcamento_op, String telefone, String endereco, String cpf_cnpj, String token,
-			String senha) {
+			String senha, int idType) {
 		this.nome = nome;
 		this.email = email;
 		this.data_nasc = data_nasc;
@@ -75,16 +79,18 @@ public class Usuario {
 		this.cpf_cnpj = cpf_cnpj;
 		this.senha = senha;
 		this.token = token;
+		this.idType = idType;
 	}
 
-	public Usuario(String email, String senha, String token) {
+	public Usuario(String email, String senha, String token, int idType) {
 		this.email = email;
 		this.senha = senha;
 		this.token = token;
+		this.idType = idType;
 	}
 
 	public Usuario(String nome, String email, String senha, LocalDate data_nasc, int orcamento_total,
-			int orcamento_op, String telefone, String endereco, String cpf_cnpj) {
+			int orcamento_op, String telefone, String endereco, String cpf_cnpj, int idType) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
@@ -94,6 +100,7 @@ public class Usuario {
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.cpf_cnpj = cpf_cnpj;
+		this.idType = idType;
 	}
 
 	public Long getId() {
@@ -120,12 +127,20 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public LocalDate getDob() {
+	public LocalDate getData_nasc() {
 		return data_nasc;
 	}
 
-	public void setDob(LocalDate data_nasc) {
+	public void setData_nasc(LocalDate data_nasc) {
 		this.data_nasc = data_nasc;
+	}
+
+	public void setIdType(int idType) {
+		this.idType = idType;
+	}
+
+	public int getIdType() {
+		return idType;
 	}
 
 	public Integer getAge() {

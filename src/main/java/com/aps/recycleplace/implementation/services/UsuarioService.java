@@ -39,10 +39,11 @@ public class UsuarioService {
 		usuario.setToken(token);
 		usuarioRepository.save(usuario);
 
-		Cookie cookieLogado = new Cookie("auth", token);
+		Cookie cookieLogado = new Cookie("token", token);
 		cookieLogado.setMaxAge(9999);
-		cookieLogado.setHttpOnly(true);
-		cookieLogado.setSecure(true);
+		cookieLogado.setHttpOnly(false);
+		cookieLogado.setSecure(false);
+		cookieLogado.setPath("/");
 
 		response.addCookie(cookieLogado);
 		response.setStatus(200);
@@ -61,8 +62,8 @@ public class UsuarioService {
 
 	@Transactional
 	public void updateUsuario(Long studentId, String name, String email) {
-		Usuario student = usuarioRepository.findById(studentId)
-				.orElseThrow(() -> new IllegalStateException("Usuario with id " + studentId + " does not exists!"));
+		Usuario student = usuarioRepository.findById(studentId).orElseThrow(
+				() -> new IllegalStateException("Usuario with id " + studentId + " does not exists!"));
 
 		if (name != null && name.length() > 0 && !Objects.equals(student.getNome(), name)) {
 			student.setNome(name);
@@ -77,7 +78,8 @@ public class UsuarioService {
 		}
 	}
 
-	public UsuarioPublicDTO getPublicUserInfo(HttpServletResponse response, String authString, Long id) {
+	public UsuarioPublicDTO getPublicUserInfo(HttpServletResponse response, String authString,
+			Long id) {
 		UsuarioPublicDTO usuarioDb = usuarioRepository.findUsuarioPublicById(id).orElse(null);
 
 		if (usuarioDb == null) {
