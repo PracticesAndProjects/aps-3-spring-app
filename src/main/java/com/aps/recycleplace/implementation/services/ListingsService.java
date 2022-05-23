@@ -3,7 +3,6 @@ package com.aps.recycleplace.implementation.services;
 import com.aps.recycleplace.domain.entities.Listagem;
 import com.aps.recycleplace.domain.entities.Usuario;
 import com.aps.recycleplace.domain.entities.UsuarioOrdem;
-import com.aps.recycleplace.domain.mapping.ListingsDTO;
 import com.aps.recycleplace.domain.mapping.OrderDTO;
 import com.aps.recycleplace.infrastructure.persistence.repositories.ListingsRepository;
 import com.aps.recycleplace.infrastructure.persistence.repositories.OrderRepository;
@@ -11,9 +10,7 @@ import com.aps.recycleplace.infrastructure.persistence.repositories.UsuarioRepos
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 

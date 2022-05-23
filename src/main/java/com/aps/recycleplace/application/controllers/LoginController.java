@@ -19,8 +19,7 @@ public class LoginController {
 	private LoginService loginService;
 
 	@PostMapping(path = "/signin")
-	public UserAuthDTO loginPostMapping(HttpServletResponse response,
-			@RequestBody Usuario usuario) {
-		loginService.doLogin(response, usuario, authString);
+	public UserAuthDTO loginPostMapping(HttpServletResponse response, @RequestBody Usuario usuario) {
+		return loginService.doLogin(response, usuario);
 	}
 }

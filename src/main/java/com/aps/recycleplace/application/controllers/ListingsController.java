@@ -1,7 +1,6 @@
 package com.aps.recycleplace.application.controllers;
 
 import com.aps.recycleplace.domain.entities.Listagem;
-import com.aps.recycleplace.domain.mapping.ListingsDTO;
 import com.aps.recycleplace.domain.mapping.OrderDTO;
 import com.aps.recycleplace.implementation.services.ListingsService;
 

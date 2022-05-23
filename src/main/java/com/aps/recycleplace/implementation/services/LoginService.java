@@ -7,9 +7,6 @@ import com.aps.recycleplace.infrastructure.persistence.repositories.UsuarioRepos
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CookieValue;
-import antlr.Token;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
@@ -24,44 +21,31 @@ public class LoginService {
 	}
 
 	@Transactional
-
 	public UserAuthDTO doLogin(HttpServletResponse response, Usuario usuario) {
 
 		Usuario usuariodb = usuarioRepository
 				.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha()).orElse(null);
 
-		if (usuariodb == null) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
-		}
 
-		if (!authString.equals("undefined") && usuariodb.getToken().equals(authString)){
-			response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-			return;
-		}
 		String newToken = TokenGenerator.generateNewToken();
+
+		if (usuariodb == null) {
+			return null;
+		}
 
 		usuario.setToken(newToken);
 		usuariodb.setToken(newToken);
 
-		// Cookie cookieSignin = new Cookie("token", newToken);
-		// cookieSignin.setMaxAge(9999);
-		// cookieSignin.setPath("/");
-		// response.addCookie(cookieSignin);
-
-		return new UserAuthDTO(usuariodb.getEmail(), usuariodb.getNome(), newToken, usuariodb.getId());
+		UserAuthDTO userLogin =
+				new UserAuthDTO(usuariodb.getEmail(), usuariodb.getNome(), newToken, usuariodb.getId());
+		return userLogin;
 	}
 
-	public boolean checkAuth(HttpServletResponse response,
-			String authString) {
+	public boolean checkAuth(HttpServletResponse response, String authString) {
+		Usuario usuariodb = usuarioRepository.findUsuarioByAuth(authString).orElse(null);
 
-
-		Usuario usuariodb = usuarioRepository
-				.findUsuarioByAuth(authString)
-				.orElse(null);
-
-
-		if (authString.equals("undefined") || usuariodb == null || !authString.equals(usuariodb.getToken())) {
+		if (authString.equals("undefined") || usuariodb == null
+				|| !authString.equals(usuariodb.getToken())) {
 			response.setStatus(401);
 			return false;
 		}
