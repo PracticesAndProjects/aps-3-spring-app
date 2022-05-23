@@ -24,14 +24,20 @@ public class LoginService {
 	}
 
 	@Transactional
+
 	public UserAuthDTO doLogin(HttpServletResponse response, Usuario usuario) {
 
 		Usuario usuariodb = usuarioRepository
 				.findUsuarioByEmailandSenha(usuario.getEmail(), usuario.getSenha()).orElse(null);
 
 		if (usuariodb == null) {
-			response.setStatus(404);
-			return null;
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
+
+		if (!authString.equals("undefined") && usuariodb.getToken().equals(authString)){
+			response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+			return;
 		}
 		String newToken = TokenGenerator.generateNewToken();
 
@@ -46,13 +52,19 @@ public class LoginService {
 		return new UserAuthDTO(usuariodb.getEmail(), usuariodb.getNome(), newToken, usuariodb.getId());
 	}
 
-	public void checkAuth(HttpServletResponse response,
-			@CookieValue(value = "auth", defaultValue = "undefined") String cookie) {
+	public boolean checkAuth(HttpServletResponse response,
+			String authString) {
 
-		Usuario usuariodb = usuarioRepository.findUsuarioByAuth(cookie).orElse(null);
 
-		if (cookie.equals("undefined") | usuariodb == null) {
+		Usuario usuariodb = usuarioRepository
+				.findUsuarioByAuth(authString)
+				.orElse(null);
+
+
+		if (authString.equals("undefined") || usuariodb == null || !authString.equals(usuariodb.getToken())) {
 			response.setStatus(401);
+			return false;
 		}
+		return true;
 	}
 }

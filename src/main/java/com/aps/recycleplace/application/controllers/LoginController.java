@@ -20,15 +20,7 @@ public class LoginController {
 
 	@PostMapping(path = "/signin")
 	public UserAuthDTO loginPostMapping(HttpServletResponse response,
-			@CookieValue(value = "auth", defaultValue = "undefined") String authString,
 			@RequestBody Usuario usuario) {
-
-		if (authString.equals("undefined")) {
-			return loginService.doLogin(response, usuario);
-		} else {
-			response.setStatus(401);
-			return null;
-		}
+		loginService.doLogin(response, usuario, authString);
 	}
-
 }
